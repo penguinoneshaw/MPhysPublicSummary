@@ -34,13 +34,13 @@ class Repl {
                 }
                 return outputstring;
             } else {
-                throw new Error(`"${topic}" not unlocked yet!`);
+                throw new Error(`${this._green(topic)} not unlocked yet!`);
             }
         }
     }
 
     helpstring() {
-        return `Hello! This is the public summary for my Mathematical Physics MPhys Project entitled 'Singing in a Warming Ocean' [but don't worry, there's no maths!].\r\n\r\nHave you ever wondered how sound travels in oceans? Do you wonder whether fish ever get deafened by loud noises? How does whale song carry over the vast distances involved in oceans?\n\r\r\nYou can do several things from this interface:\r\n${this._red('about <topic>')}: Defines <topic>.\r\n${this._red('available-topics')}: Brings up the list of available topics. More are unlocked as you go through!\nStart with ${this._red('about')} ${this._green('sound')}!`;
+        return `Hello! This is the public summary for my Mathematical Physics MPhys Project entitled 'Singing in a Warming Ocean' [but don't worry, there's no maths!].\r\n\r\nHave you ever wondered how sound travels in oceans? Do you wonder whether fish ever get deafened by loud noises? How does whale song carry over the vast distances involved in oceans?\n\r\r\nThere are several things you can do by typing the commands in red and pressing 'enter':\r\n${this._red('about <topic>')}: Defines <topic>.\r\n${this._red('available-topics')}: Shows the list of available topics. More are unlocked as you go through!\n${this._red('help')}: Shows this help message.\n\nStart by typing ${this._red('about')} ${this._green('sound')} below!`;
     }
 
     _commands(command) {
@@ -53,7 +53,7 @@ class Repl {
             return this._definitions(tokenized.slice(1).join(' '));
         case 'available-topics':
         case 'avail':
-            return '\nTopics\r\n======\r\n' + Object.keys(this.state.topics.topics).filter((k) => this.state.topics.topics[k].unlocked).map(this._green).join('\r\n');
+            return '\nTopics\r\n======\r\n' + Object.keys(this.state.topics.topics).filter((k) => this.state.topics.topics[k].unlocked).map((k) => this.state.topics.topics[k].visited ? k + ' ✓': this._green(k)).join('\r\n');
         case '':
             return '';
         default:
