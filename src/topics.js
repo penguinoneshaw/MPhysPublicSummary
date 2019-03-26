@@ -29,7 +29,7 @@ export default {
             unlocks: ['speed of sound']
         },
         'waves': {
-            description: 'There are many different types of wave.\nAs Physicists, we care about two types: longitudinal (lengthways) and transverse (crossways).\n',
+            description: 'Waves are how we describe motion in repeating patterns of variation.\nThere are many different types of wave.\nAs Physicists, we care about two types: longitudinal (lengthways) and transverse (crossways).\nSound is a longitudinal wave, meaning that it is the result of particles moving closer and further away from one another in the direction of travel.\nThis is like when you ',
             unlocked: false,
             unlocks: ['speed of sound']
         },
