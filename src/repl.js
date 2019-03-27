@@ -29,7 +29,7 @@ class Repl {
                     const toBeUnlocked = topicData.unlocks.filter((k)=> this.state.topics.topics[k].unlocked == false);
                     if (toBeUnlocked.length > 0) {
                         toBeUnlocked.forEach((key) => this.state.topics.topics[key].unlocked = true);
-                        outputstring += `\r\n\r\nYou've unlocked: ${topicData.unlocks.map(this._green).join(', ')}`;
+                        outputstring += `\n\nYou've unlocked: ${topicData.unlocks.map(this._green).join(', ')}`;
                     }
                 }
                 return outputstring;
@@ -40,7 +40,7 @@ class Repl {
     }
 
     helpstring() {
-        return `Hello! This is the public summary for my Mathematical Physics MPhys Project entitled 'Singing in a Warming Ocean' [but don't worry, there's no maths!].\r\n\r\nHave you ever wondered how sound travels in oceans? Do you wonder whether fish ever get deafened by loud noises? How does whale song carry over the vast distances involved in oceans?\n\r\r\nThere are several things you can do by typing the commands in red and pressing 'enter':\r\n${this._red('about <topic>')}: Defines <topic>.\r\n${this._red('available-topics')}: Shows the list of available topics. More are unlocked as you go through!\n${this._red('help')}: Shows this help message.\n\nStart by typing ${this._red('about')} ${this._green('sound')} below!`;
+        return `Hello! This is the public summary for my Mathematical Physics MPhys Project entitled 'Singing in a Warming Ocean' [but don't worry, there's no maths!].\n\nHave you ever wondered how sound travels in oceans? Do you wonder whether fish ever get deafened by loud noises? How does whale song carry over the vast distances involved in oceans?\n\nThere are several things you can do by typing the commands in red and pressing 'enter':\n${this._red('about <topic>')}: Defines <topic>.\n${this._red('topics')}: Shows the list of available topics. More are unlocked as you go through!\n${this._red('help')}: Shows this help message.\n\nStart by typing ${this._red('about')} ${this._green('sound')} below!`;
     }
 
     _commands(command) {
@@ -51,9 +51,9 @@ class Repl {
             return this.helpstring();
         case 'about':
             return this._definitions(tokenized.slice(1).join(' '));
-        case 'available-topics':
+        case 'topics':
         case 'avail':
-            return '\nTopics\r\n======\r\n' + Object.keys(this.state.topics.topics).filter((k) => this.state.topics.topics[k].unlocked).map((k) => this.state.topics.topics[k].visited ? k + ' ✓': this._green(k)).join('\r\n');
+            return '\n' + Object.keys(this.state.topics.topics).filter((k) => this.state.topics.topics[k].unlocked).map((k) => this.state.topics.topics[k].visited ? k + ' ✓': this._green(k)).join('\n');
         case '':
             return '';
         default:

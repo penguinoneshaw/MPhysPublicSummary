@@ -3,6 +3,7 @@ import commonjs from 'rollup-plugin-commonjs';
 import { terser } from 'rollup-plugin-terser';
 import babel from 'rollup-plugin-babel';
 import postcss from 'rollup-plugin-postcss';
+import html from 'rollup-plugin-fill-html';
 
 // `npm run build` -> `production` is true
 // `npm run dev` -> `production` is false
@@ -22,6 +23,11 @@ export default {
         postcss({
             plugins: []
         }),
-        production && terser() // minify, but only in production
+        production && terser(), // minify, but only in production
+        html({
+            template: 'src/index.html',
+            filename: 'index.html',
+            
+        })
     ]
 };

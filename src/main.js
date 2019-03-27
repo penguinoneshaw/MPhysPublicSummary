@@ -1,9 +1,15 @@
 /* eslint-disable no-case-declarations */
-import { Terminal } from 'xterm';
-import {default as Repl, SPECIAL_INPUTS} from './repl';
+import {
+    Terminal
+} from 'xterm';
+import {
+    default as Repl,
+    SPECIAL_INPUTS
+} from './repl';
 import winPtyCompat from 'xterm/lib/addons/winptyCompat/winptyCompat';
 import fit from 'xterm/lib/addons/fit/fit';
 import webLinks from 'xterm/lib/addons/webLinks/webLinks';
+import ResizeObserver from 'resize-observer-polyfill';
 
 import 'xterm/dist/xterm.css';
 import './main.css';
@@ -16,12 +22,12 @@ let term = new Terminal({
     cursorBlink: true,
     convertEol: true
 });
-term.open(document.queryCommandEnabled('#terminal'));
-window.term = term;
+term.open(document.querySelector('#terminal'));
 
 term.prompt = () => {
     term.write('\r\n\r\n$ ');
 };
+
 
 term.winptyCompatInit();
 term.webLinksInit();
@@ -32,7 +38,8 @@ const repl = new Repl();
 term.writeln(repl.helpstring());
 term.prompt();
 
-term.on('key', async (key,ev) => {
+
+term.on('key', async (key, ev) => {
     try {
         switch (ev.key) {
         case 'Enter':
